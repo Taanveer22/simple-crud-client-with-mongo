@@ -1,4 +1,4 @@
-function App() {
+function Form() {
   const handleAddUser = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,7 +16,13 @@ function App() {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          alert("user added successfully");
+          form.reset();
+        }
+      });
   };
   return (
     <>
@@ -30,4 +36,4 @@ function App() {
   );
 }
 
-export default App;
+export default Form;
