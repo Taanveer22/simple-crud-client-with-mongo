@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
-const Users = () => {
+const AllUsers = () => {
   const usersData = useLoaderData();
   const [users, setUsers] = useState(usersData);
 
@@ -22,20 +22,22 @@ const Users = () => {
   };
   const btnStyle = {
     backgroundColor: "red",
-    padding: "3px",
     margin: "6px",
   };
   return (
     <div>
       {/* 1. Use 'users.length' instead of 'usersData.length' */}
-      <h1>user available : {users.length}</h1>
+      <h1>All users available : {users.length}</h1>
       <div>
         {/* 2. Map over 'users' instead of 'usersData' */}
         {users.map((item) => (
           <p key={item._id}>
             {item.name} : {item.email} : {item._id}
+            <Link to={`/updateUsers/${item._id}`}>
+              <button>Update</button>
+            </Link>
             <button onClick={() => handleDelete(item._id)} style={btnStyle}>
-              X
+              Delete
             </button>
           </p>
         ))}
@@ -44,4 +46,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default AllUsers;

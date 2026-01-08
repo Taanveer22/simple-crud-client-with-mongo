@@ -1,8 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Users from "./Users.jsx";
 import Form from "./Form.jsx";
+import UpdateUsers from "./UpdateUsers.jsx";
+import AllUsers from "./AllUsers.jsx";
 
 const router = createBrowserRouter([
   {
@@ -10,9 +11,16 @@ const router = createBrowserRouter([
     element: <Form></Form>,
   },
   {
-    path: "/users",
-    element: <Users></Users>,
+    path: "/allUsers",
+    element: <AllUsers></AllUsers>,
     loader: () => fetch("http://localhost:5000/users"),
+  },
+  {
+    path: "/updateUsers/:id",
+    element: <UpdateUsers></UpdateUsers>,
+    loader: ({ params }) => {
+      return fetch(`http://localhost:5000/users/${params.id}`);
+    },
   },
 ]);
 
